@@ -1,0 +1,56 @@
+# docker-compose.yml
+version: '3.8'
+
+services:
+  # API Gateway instance 1
+  api_gateway1:
+    build: .
+    ports:
+      - '3001:3000'
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - rabbitmq
+    networks:
+      - api-network
+
+    # API Gateway instance 2
+  api_gateway2:
+    build: .
+    ports:
+      - '3002:3000'
+    environment:
+      - NODE_ENV=development
+    depends_on:
+      - rabbitmq
+    networks:
+      - api-network
+
+  # RabbitMQ
+  rabbitmq:
+    image: 'rabbitmq:management-alpine'
+    ports:
+      - '5672:5672'
+      - '15672:15672'
+    networks:
+      - api-network
+
+  # Nginx Load Balancer
+  nginx:
+    image: 'nginx:latest'
+    restart: always
+    ports:
+      - '80:80'
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - nginx-logs:/var/log/nginx/
+    networks:
+      - api-network
+    depends_on:
+      - api_gateway1
+      - api_gateway2
+
+networks:
+  api-network:
+volumes:
+  nginx-logs:
