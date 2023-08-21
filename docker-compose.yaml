@@ -2,36 +2,36 @@
 version: '3.8'
 
 services:
-  # API Gateway instance 1
-  api_gateway1:
-    build: .
-    ports:
-      - '3001:3000'
-    environment:
-      - NODE_ENV=development
-    depends_on:
-      - rabbitmq
-    networks:
-      - api-network
-
-    # API Gateway instance 2
-  api_gateway2:
-    build: .
-    ports:
-      - '3002:3000'
-    environment:
-      - NODE_ENV=development
-    depends_on:
-      - rabbitmq
-    networks:
-      - api-network
-
   # RabbitMQ
   rabbitmq:
     image: 'rabbitmq:management-alpine'
     ports:
       - '5672:5672'
       - '15672:15672'
+    networks:
+      - api-network
+
+  # API Gateway instance 1
+  api_gateway1:
+    build: .
+    ports:
+      - '3001:3000'
+    env_file:
+      - .env.development
+    depends_on:
+      - rabbitmq
+    networks:
+      - api-network
+
+  # API Gateway instance 2
+  api_gateway2:
+    build: .
+    ports:
+      - '3002:3000'
+    env_file:
+      - .env.development
+    depends_on:
+      - rabbitmq
     networks:
       - api-network
 
@@ -52,5 +52,7 @@ services:
 
 networks:
   api-network:
+    driver: bridge
+
 volumes:
   nginx-logs:
