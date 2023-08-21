@@ -25,5 +25,9 @@ export const validationSchema = Joi.object({
     'any.required': 'MONGO_PASS is required',
     'string.base': 'MONGO_PASS must be a string',
   }),
+  RABBITMQ_URI: Joi.string().required().messages({
+    'any.required': 'RABBITMQ_URI is required',
+    'string.base': 'RABBITMQ_URI must be a string',
+  }),
   // ... other environment variables
 });

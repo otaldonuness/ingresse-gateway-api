@@ -7,7 +7,7 @@ import {
 } from 'class-validator';
 import { Match } from 'src/decorators/match.decorator';
 
-export class UserDTO {
+export class CreateUserDTO {
   @IsUUID('4', {
     message: 'Please provide a valid id',
     context: {

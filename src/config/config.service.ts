@@ -28,5 +28,9 @@ export class ConfigService {
   get mongoPassword(): string {
     return this.configService.get<string>('MONGO_PASS');
   }
+
+  get rabbitMqUri(): string {
+    return this.configService.get<string>('RABBITMQ_URI');
+  }
   // Add other getters for the rest of your configuration variables
 }

@@ -6,19 +6,21 @@ import { WinstonModule } from './logger/winston.module';
 import { MongooseModule } from './database/mongoose.module';
 import { ConfigModule } from './config/config.module';
 import { PrometheusModule } from '@willsoto/nestjs-prometheus';
+import { UserModule } from './user/user.module';
 
 @Module({
   imports: [
     ConfigModule,
-    CustomThrottlerModule,
     WinstonModule,
-    MongooseModule,
     PrometheusModule.register({
       defaultLabels: {
         app: 'ingresse-gateway-api',
-        path: '/api/metrics',
+        path: '/metrics',
       },
     }),
+    MongooseModule,
+    CustomThrottlerModule,
+    UserModule,
   ],
   controllers: [AppController],
   providers: [AppService],

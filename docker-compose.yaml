@@ -10,6 +10,8 @@ services:
       - '15672:15672'
     networks:
       - api-network
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
 
   # API Gateway instance 1
   api_gateway1:
@@ -54,18 +56,24 @@ services:
   grafana:
     image: grafana/grafana
     ports:
-      - '8080:8080'
+      - '8080:3000'
+    networks:
+      - api-network
+    volumes:
+      - grafana-storage:/var/lib/grafana
 
   # Prometheus
   prometheus:
     image: prom/prometheus
     ports:
       - '9090:9090'
-    volumes:
-      - ./prometheus.yml:/etc/prometheus/prometheus.yml:ro
     depends_on:
       - api_gateway1
       - api_gateway2
+    networks:
+      - api-network
+    volumes:
+      - prometheus-data:/prometheus
 
 networks:
   api-network:
@@ -73,3 +81,6 @@ networks:
 
 volumes:
   nginx-logs:
+  rabbitmq_data:
+  grafana-storage:
+  prometheus-data:
