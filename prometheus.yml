@@ -1,0 +1,15 @@
+global:
+  scrape_interval: 15s # Set the scrape interval to every 15 seconds. Default is every 1 minute.
+  evaluation_interval: 15s # Evaluate rules every 15 seconds. The default is every 1 minute.
+
+scrape_configs:
+  - job_name: 'api_gateway1'
+    static_configs:
+      - targets: ['api_gateway1:3001'] # Adjust this to the appropriate endpoint for your API Gateway instance 1.
+
+  - job_name: 'api_gateway2'
+    static_configs:
+      - targets: ['api_gateway2:3002'] # Adjust this to the appropriate endpoint for your API Gateway instance 2.
+
+
+  # Add more jobs as needed for other services you want to monitor.
