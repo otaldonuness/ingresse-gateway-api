@@ -17,7 +17,7 @@ export class UserDTO {
       value: '123e4567-e89b-12d3-a456-426614174000',
     },
   })
-  id: string;
+  _id: string;
 
   @IsNotEmpty({
     message: 'Please provide a username',

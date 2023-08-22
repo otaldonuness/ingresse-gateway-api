@@ -4,21 +4,12 @@ import {
   IsUUID,
   IsNotEmpty,
   IsStrongPassword,
+  MinLength,
+  MaxLength,
 } from 'class-validator';
 import { Match } from 'src/decorators/match.decorator';
 
 export class CreateUserDTO {
-  @IsUUID('4', {
-    message: 'Please provide a valid id',
-    context: {
-      errorCode: 'id',
-      example: '123e4567-e89b-12d3-a456-426614174000',
-      field: 'id',
-      value: '123e4567-e89b-12d3-a456-426614174000',
-    },
-  })
-  id: string;
-
   @IsNotEmpty({
     message: 'Please provide a username',
     context: {
@@ -30,6 +21,24 @@ export class CreateUserDTO {
   })
   @IsString({
     message: 'Username must be a string',
+    context: {
+      errorCode: 'username',
+      example: 'john.doe',
+      field: 'username',
+      value: 'john.doe',
+    },
+  })
+  @MinLength(3, {
+    message: 'Username must be at least 3 characters long',
+    context: {
+      errorCode: 'username',
+      example: 'john.doe',
+      field: 'username',
+      value: 'john.doe',
+    },
+  })
+  @MaxLength(20, {
+    message: 'Username must be at most 20 characters long',
     context: {
       errorCode: 'username',
       example: 'john.doe',

@@ -7,10 +7,9 @@ export class UserService {
   constructor(private rabbitMQService: RabbitMQService) {}
 
   async createUser(userDto: CreateUserDTO): Promise<any> {
-    const queue = 'user_queue';
-    const pattern = { cmd: 'create-user' };
+    const queue = 'create-user';
     const payload = userDto;
 
-    return await this.rabbitMQService.sendMessage(queue, { pattern, payload });
+    return await this.rabbitMQService.sendMessage(queue, payload);
   }
 }

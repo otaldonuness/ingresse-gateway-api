@@ -24,13 +24,14 @@ export class RabbitMQService implements OnModuleDestroy {
   }
 
   async sendMessage(queue: string, message: any): Promise<any> {
-    message = JSON.stringify(message);
     const pattern = { cmd: queue };
 
     try {
       return await this.client.send(pattern, message).toPromise();
     } catch (error) {
-      throw new Error('Failed to send message');
+      throw new Error(
+        `Error sending message to queue: ${queue}, error: ${error}`,
+      );
     }
   }
 }
