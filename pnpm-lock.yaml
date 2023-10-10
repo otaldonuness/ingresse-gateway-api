@@ -37,7 +37,7 @@ dependencies:
     version: 2.0.0-beta.2(@nestjs/microservices@10.2.0)(@nestjs/platform-express@10.0.0)(class-transformer@0.5.1)(class-validator@0.14.0)(rxjs@7.8.1)
   '@willsoto/nestjs-prometheus':
     specifier: ^5.3.0
-    version: 5.3.0(@nestjs/common@10.0.0)(prom-client@14.2.0)
+    version: 5.3.0(@nestjs/common@10.0.0)(prom-client@15.0.0)
   amqp-connection-manager:
     specifier: ^4.1.14
     version: 4.1.14(amqplib@0.10.3)
@@ -60,8 +60,8 @@ dependencies:
     specifier: ^1.9.3
     version: 1.9.3(@nestjs/common@10.0.0)(winston@3.10.0)
   prom-client:
-    specifier: ^14.2.0
-    version: 14.2.0
+    specifier: ^15.0.0
+    version: 15.0.0
   reflect-metadata:
     specifier: ^0.1.13
     version: 0.1.13
@@ -1335,6 +1335,11 @@ packages:
     transitivePeerDependencies:
       - encoding
 
+  /@opentelemetry/api@1.6.0:
+    resolution: {integrity: sha512-OWlrQAnWn9577PhVgqjUvMr1pg57Bc4jv0iL4w0PRuOSRvq67rvHW9Ie/dZVMvCzhSCB+UxhcY/PmCmFj33Q+g==}
+    engines: {node: '>=8.0.0'}
+    dev: false
+
   /@pkgr/utils@2.4.2:
     resolution: {integrity: sha512-POgTXhjrTfbTV63DiFXav4lBHiICLKKwDeaKn9Nphwj7WH6m0hMMCaJkMyRWjgtPFyRKRVoMXXjczsTQRDEhYw==}
     engines: {node: ^12.20.0 || ^14.18.0 || >=16.0.0}
@@ -1861,14 +1866,14 @@ packages:
       '@xtuc/long': 4.2.2
     dev: true
 
-  /@willsoto/nestjs-prometheus@5.3.0(@nestjs/common@10.0.0)(prom-client@14.2.0):
+  /@willsoto/nestjs-prometheus@5.3.0(@nestjs/common@10.0.0)(prom-client@15.0.0):
     resolution: {integrity: sha512-EJrLgfBTJtsep6wWsS1mH7utloUVzgY603av0ry2kesiPYr/Qw0hB3jbmQ5CJe9WOf9e5/zxx1QgGv47wSZ6QQ==}
     peerDependencies:
       '@nestjs/common': ^7.0.0 || ^8.0.0 || ^9.0.0 || ^10.0.0
       prom-client: ^13.0.0 || ^14.0.0
     dependencies:
       '@nestjs/common': 10.0.0(class-transformer@0.5.1)(class-validator@0.14.0)(reflect-metadata@0.1.13)(rxjs@7.8.1)
-      prom-client: 14.2.0
+      prom-client: 15.0.0
     dev: false
 
   /@xtuc/ieee754@1.2.0:
@@ -4865,10 +4870,11 @@ packages:
       tdigest: 0.1.2
     dev: false
 
-  /prom-client@14.2.0:
-    resolution: {integrity: sha512-sF308EhTenb/pDRPakm+WgiN+VdM/T1RaHj1x+MvAuT8UiQP8JmOEbxVqtkbfR4LrvOg5n7ic01kRBDGXjYikA==}
-    engines: {node: '>=10'}
+  /prom-client@15.0.0:
+    resolution: {integrity: sha512-UocpgIrKyA2TKLVZDSfm8rGkL13C19YrQBAiG3xo3aDFWcHedxRxI3z+cIcucoxpSO0h5lff5iv/SXoxyeopeA==}
+    engines: {node: ^16 || ^18 || >=20}
     dependencies:
+      '@opentelemetry/api': 1.6.0
       tdigest: 0.1.2
     dev: false
 
